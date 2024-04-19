@@ -36,7 +36,7 @@ const App = () => {
     });
   };
 
-  const toggleNav = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const toggleNav = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.preventDefault();
     setIsActive(prevState => !prevState);
 
@@ -71,7 +71,7 @@ const App = () => {
         <nav>
           <ul>
             {navItems.map((nav) => (
-              <NavItem key={nav} id={nav.id} label={nav.label} toggleNav={toggleNav} isActive={isActive} />
+              <NavItem key={nav.id} id={nav.id} label={nav.label} toggleNav={toggleNav} isActive={isActive} />
             ))}
           </ul>
         </nav>
