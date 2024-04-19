@@ -39,6 +39,7 @@ const App = () => {
   const toggleNav = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.preventDefault();
     setIsActive(prevState => !prevState);
+
   };
 
   useEffect(() => {
@@ -59,7 +60,9 @@ const App = () => {
 
   return (
     <div>
+      {/* <!-- Menu Bars --> */}
       <div id="menu-bars" className={`menu-bars ${isActive ? 'change' : ''}`} onClick={toggleNav}>
+        {/* Menu bars content */}
         <div className="bar1"></div>
         <div className="bar2"></div>
         <div className="bar3"></div>
@@ -78,7 +81,7 @@ const App = () => {
       <section id="nav-2" className='about'><h1>Learn More About Me</h1></section>
       <section id="nav-3" className='skills'><h1>These Are My Strengths</h1></section>
       <section id="nav-4" className='projects'><h1>These Are My Results</h1></section>
-      <section id="nav-5" className='contact'><h1>Available An+ytime</h1></section>
+      <section id="nav-5" className='contact'><h1>Available Anytime</h1></section>
     </div>
   );
 };
