@@ -6,7 +6,14 @@ const App = () => {
   
   const [isActive, setIsActive] = useState(false);
 
-  const NavItem = ({ id, toggleNav, label }) => (
+  type Props = {
+    id: string,
+    label: string,
+    toggleNav: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+    isActive: boolean;
+  }
+
+  const NavItem: React.FC<Props> = ({ id, toggleNav, label, isActive }) => (
     <li id={id} className={`slide-${isActive ? 'in' : 'out'}-${id.split('-')[1]}`} onClick={toggleNav}>
       <a href={`#${id}`}>{label}</a>
     </li>
@@ -20,24 +27,33 @@ const App = () => {
     {id: 'nav-5', label: 'CONTACT'}
   ];
 
-  const navAnimation = (direction1, direction2) => {
+  const navAnimation = (direction1: string , direction2: string) => {
     navItems.forEach((nav, i) => {
-      document.getElementById(nav.id).classList.replace(`slide-${direction1}-${i + 1}`, `slide-${direction2}-${i + 1}`);
+      const element = document.getElementById(nav.id);
+      if (element) {
+        element.classList.replace(`slide-${direction1}-${i + 1}`, `slide-${direction2}-${i + 1}`);
+      } 
     });
   };
 
-  const toggleNav = (event) => {
+  const toggleNav = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.preventDefault();
     setIsActive(prevState => !prevState);
   };
 
   useEffect(() => {
     if (isActive) {
-      document.getElementById('overlay').classList.replace('overlay-slide-left', 'overlay-slide-right');
-      navAnimation('out', 'in');
+      const overlay = document.getElementById('overlay');
+      if (overlay) {
+        overlay.classList.replace('overlay-slide-left', 'overlay-slide-right');
+        navAnimation('out', 'in');
+      }
     } else {
-      document.getElementById('overlay').classList.replace('overlay-slide-right', 'overlay-slide-left');
-      navAnimation('in', 'out');
+      const overlay = document.getElementById('overlay'); 
+      if (overlay) {
+        overlay.classList.replace('overlay-slide-right', 'overlay-slide-left');
+        navAnimation('in', 'out');
+      }
     }
   }, [isActive]);
 
